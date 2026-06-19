@@ -13,7 +13,7 @@ Como usuario de la plataforma quiero organizar un presupuesto por categorias par
 ### HU-06
 Como usuario de la plataforma quiero tener registro de todos mis datos financieros mensuales para llevar un seguimiento.
 ### HU-07
-Como usuario de la plataforma quiero que mis gastos se reinicien mensualmente para no tener que reiniciarlo manualmente.
+Como usuario quiero que el sistema cree automáticamente un nuevo periodo financiero cada mes para comenzar un nuevo seguimiento sin perder mi historial anterior.
 ### HU-08
 Como usuario de la plataforma quiero tener un calendario con todos los pagos de mas de 100.000 COP que he realizado hasta el momento para tener una representacion grafica de mis gastos importantes.
 ### HU-09
