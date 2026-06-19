@@ -6,7 +6,7 @@ name: Auto Merge to Develop
 on:
   pull_request:
     branches:
-      - develop
+      - main
     types: [opened, synchronize, labeled, reopened]
 
 permissions:
