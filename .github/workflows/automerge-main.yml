@@ -1,7 +1,7 @@
-# Auto merge de PRs hacia develop
+# Auto merge de PRs hacia main
 # Solo se ejecuta si el PR esta listo y cumple condiciones
 
-name: Auto Merge to Develop
+name: Auto Merge to Main
 
 on:
   pull_request:
