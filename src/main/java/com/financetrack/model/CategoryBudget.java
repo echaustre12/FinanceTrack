@@ -2,7 +2,6 @@ package com.financetrack.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 @Entity
 @Table(name = "category_budget")
 public class CategoryBudget {
