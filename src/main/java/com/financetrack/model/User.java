@@ -12,7 +12,7 @@ public class User {
     //Llave primaria
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     //Otros Atributos
     @Column(name = "name", nullable = false)
@@ -46,4 +46,8 @@ public class User {
     //Un usuario tiene multiples pagos recurrentes
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RecurringPayment> recurringPayments;
+
+    // Un usuario tiene multiples metas de ahorro
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SavingGoal> savingGoals;
 }

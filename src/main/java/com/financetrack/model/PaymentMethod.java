@@ -11,7 +11,7 @@ public class PaymentMethod {
     //Llave primaria
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     //Otros Atributos
     @Column(name = "name", nullable = false, unique = true)

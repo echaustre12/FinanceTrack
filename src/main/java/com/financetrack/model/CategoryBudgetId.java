@@ -2,34 +2,54 @@ package com.financetrack.model;
 
 import jakarta.persistence.Embeddable;
 
-@Embeddable
-public class CategoryBudgetId {
+import java.io.Serializable;
+import java.util.Objects;
 
-    private long categoryId;
-    private long financialPeriodId;
+@Embeddable
+public class CategoryBudgetId implements Serializable {
+
+    private int categoryId;
+    private int financialPeriodId;
 
     protected CategoryBudgetId() {
         // Constructor requerido por JPA
     }
 
-    public CategoryBudgetId(long categoryId, long financialPeriodId) {
+    public CategoryBudgetId(int categoryId, int financialPeriodId) {
         this.categoryId = categoryId;
         this.financialPeriodId = financialPeriodId;
     }
 
-    public long getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(long categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
-    public long getFinancialPeriodId() {
+    public int getFinancialPeriodId() {
         return financialPeriodId;
     }
 
-    public void setFinancialPeriodId(long financialPeriodId) {
+    public void setFinancialPeriodId(int financialPeriodId) {
         this.financialPeriodId = financialPeriodId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof CategoryBudgetId that)) {
+            return false;
+        }
+        return categoryId == that.categoryId
+                && financialPeriodId == that.financialPeriodId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(categoryId, financialPeriodId);
     }
 }

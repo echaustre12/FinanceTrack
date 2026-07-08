@@ -9,7 +9,7 @@ public class RecurringPayment {
     //Llave Primaria
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     //Otros Atributos
     @Column(name = "name", nullable = false)

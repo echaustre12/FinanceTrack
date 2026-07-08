@@ -12,7 +12,7 @@ public class Expense {
     //Llave primaria
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     //Otros atributos
     @Column(name = "amount", nullable = false)

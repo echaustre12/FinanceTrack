@@ -135,3 +135,30 @@ CREATE TABLE category_budget (
         REFERENCES financial_period(id)
         ON DELETE CASCADE
 );
+
+CREATE TABLE saving_goal (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    target_amount NUMERIC(12,2) NOT NULL,
+    current_amount NUMERIC(12,2) NOT NULL DEFAULT 0,
+
+    user_id INTEGER NOT NULL,
+
+    CONSTRAINT fk_saving_goal_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+);
+
+CREATE TABLE saving_contribution (
+    id SERIAL PRIMARY KEY,
+    amount NUMERIC(12,2) NOT NULL,
+    contribution_date DATE NOT NULL DEFAULT CURRENT_DATE,
+
+    saving_goal_id INTEGER NOT NULL,
+
+    CONSTRAINT fk_contribution_goal
+        FOREIGN KEY (saving_goal_id)
+        REFERENCES saving_goal(id)
+        ON DELETE CASCADE
+);
