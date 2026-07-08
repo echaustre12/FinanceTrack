@@ -12,7 +12,7 @@ public class Notification {
     //Llave primaria
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     //Otros Atributos
     @Column(name = "message", nullable = false)
