@@ -5,8 +5,8 @@ import {
 } from "recharts";
 import {
   Home, Wallet, History, Tag, CalendarClock, Calendar, RefreshCcw,
-  PiggyBank, Bell, User, Plus, Trash2, ArrowLeft, TrendingUp,
-  TrendingDown, X, ChevronRight, CreditCard, Menu, Check
+  PiggyBank, Bell, User, Plus, Trash2, ArrowLeft, TrendingUp, LogOut,
+  TrendingDown, X, ChevronRight, CreditCard, Menu, Check, Settings
 } from "lucide-react";
 
 /* ============================= TOKENS ============================= */
