@@ -1,3 +1,8 @@
+import { useState } from "react";
+import AuthShell from "../../pages/auth/AuthShell";
+import ErrorText from "../../components/ui/ErrorText";
+import ClayButton from "../ui/ClayButton";
+
 function RegisterForm({ onGoLogin, onRegistered }) {
   const [form, setForm] = useState({ name: "", email: "", password: "", phoneNumber: "" });
   const [error, setError] = useState(null);

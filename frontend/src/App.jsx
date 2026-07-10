@@ -12,8 +12,17 @@ import {
 
 import useCollection from "./hooks/useCollection";
 import LandingChoice from "./pages/auth/LandingChoice";
-import RegisterForm from ""
-
+import RegisterForm from "./components/forms/RegisterForm"
+import LoginForm from "./components/forms/LoginForm"
+import ClayButton from "./components/ui/ClayButton";
+import Clay from "./components/ui/Clay";
+import IconChip from "./components/ui/IconChip";
+import ErrorText from "./components/ui/ErrorText";
+import Loading from "./components/ui/Loading";
+import Modal from "./components/ui/Modal";
+import PaymentMethodList from "./components/ui/PaymenthMethodList";
+import Progress from "./components/ui/Progress";
+import QuickActions from "./components/ui/QuickActions";
 
 export default function App() {
   const [authView, setAuthView] = useState("landing"); // landing | login | register
