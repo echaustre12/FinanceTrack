@@ -1,3 +1,6 @@
+import AuthShell from "./AuthShell";
+import ClayButton from "../../components/ui/ClayButton";
+
 function LandingChoice({ onGoLogin, onGoRegister }) {
   return (
     <AuthShell>
