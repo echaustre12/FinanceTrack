@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 /* Colección genérica: GET lista, POST crear, DELETE eliminar */
 function useCollection(token, path, enabled = true) {
   const [items, setItems] = useState([]);

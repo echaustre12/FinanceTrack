@@ -10,6 +10,11 @@ import {
   UserCircle2, ArrowDownCircle, ArrowUpCircle
 } from "lucide-react";
 
+import useCollection from "./hooks/useCollection";
+import LandingChoice from "./pages/auth/LandingChoice";
+import RegisterForm from ""
+
+
 export default function App() {
   const [authView, setAuthView] = useState("landing"); // landing | login | register
   const [prefillEmail, setPrefillEmail] = useState("");
@@ -117,7 +122,6 @@ export default function App() {
   if (!authed) {
     return (
       <>
-        <GlobalStyles />
         {authView === "landing" && <LandingChoice onGoLogin={() => setAuthView("login")} onGoRegister={() => setAuthView("register")} />}
         {authView === "register" && (
           <RegisterForm
@@ -211,7 +215,6 @@ export default function App() {
 
   return (
     <>
-      <GlobalStyles />
       <div className="app-shell">
         <Sidebar view={view} setView={go} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
         {mobileOpen && <div className="mobile-veil" onClick={() => setMobileOpen(false)} />}
