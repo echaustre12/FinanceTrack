@@ -1,30 +1,27 @@
 package com.financetrack.model;
 
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "notification")
-public class Notification {
-    //Atributos relacionados a la clase Notification
+@Table(name = "payment_method")
+public class PaymentMethod {
+    //Atributos relacionados a la clase PaymentMethod
     //Llave primaria
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     //Otros Atributos
-    @Column(name = "message", nullable = false)
-    private String message;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Column(name = "date", nullable = false)
-    private LocalDate date;
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
 
     //Relaciones
-    //Un usuario tiene multiples notificaciones
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @OneToMany(mappedBy = "paymentMethod", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Income> incomes;
+
+    @OneToMany(mappedBy = "paymentMethod", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Expense> expenses;
+
 }

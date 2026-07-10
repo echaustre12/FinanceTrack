@@ -1,0 +1,38 @@
+.mobile-only {
+  display: none;
+}
+
+.mobile-veil {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 39;
+}
+
+@media (max-width: 920px) {
+  .grid--2,
+  .grid--plan,
+  .cat-manage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-main {
+    padding: 20px 16px 50px;
+  }
+
+  .sidebar {
+    position: fixed;
+    z-index: 40;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform .25s ease;
+  }
+
+  .sidebar--open {
+    transform: translateX(0);
+  }
+
+  .mobile-only {
+    display: flex;
+  }
+}
