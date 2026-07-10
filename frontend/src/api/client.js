@@ -1,6 +1,6 @@
-const API_BASE = "http://localhost:8080";
+export const API_BASE = "http://localhost:8080";
 
-async function apiFetch(path, options = {}, token) {
+async function rawFetch(path, options = {}, token) {
   const res = await fetch(`${API_BASE}${path}`, {
     ...options,
     headers: {
@@ -20,3 +20,5 @@ async function apiFetch(path, options = {}, token) {
   if (res.status === 204) return null;
   try { return await res.json(); } catch (_) { return null; }
 }
+
+export default rawFetch;

@@ -23,6 +23,7 @@ import Modal from "./components/ui/Modal";
 import PaymentMethodList from "./components/ui/PaymenthMethodList";
 import Progress from "./components/ui/Progress";
 import QuickActions from "./components/ui/QuickActions";
+import rawFetch from "./api/client";
 
 export default function App() {
   const [authView, setAuthView] = useState("landing"); // landing | login | register
