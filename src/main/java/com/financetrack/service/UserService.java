@@ -31,28 +31,28 @@ public class UserService implements UserDetailsService{
                 .build();
     }
 
-    public User register(String name, String password, String email, String phoneNumber) {
-        if (name == null || name.isBlank()){
+    public User register(RegisterRequest request) {
+        if (request.getName() == null || request.getName().isBlank()){
             throw new IllegalArgumentException("El nombre es obligatorio");
         }
-        if (password == null || password.length() < 8){
+        if (request.getPassword() == null || request.getPassword().length() < 8){
             throw new IllegalArgumentException("La contraseña debe tener al menos 8 caracteres");
         }
-        if (email == null || email.isBlank()){
+        if (request.getEmail() == null || request.getEmail().isBlank()){
             throw new IllegalArgumentException("El correo es obligatorio");
         }
-        if (!email.matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")){
+        if (!request.getEmail().matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")){
             throw new IllegalArgumentException("El formato del correo no es válido");
         }
-        if (userRepository.findByEmail(email).isPresent()){
-            throw new IllegalArgumentException("El correo ya se encuentra registrado");
+        if (userRepository.findByEmail(request.getEmail()).isPresent()){
+            throw new IllegalArgumentException("Ya existe un usuario con el correo registrado");
         }
 
         User user = new User();
-        user.setName(name);
-        user.setEmail(email);
-        user.setPhoneNumber(phoneNumber);
-        user.setPassword(passwordEncoder.encode(password));
+        user.setName(request.getName());
+        user.setEmail(request.getEmail());
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
 
         return userRepository.save(user);
     }
