@@ -1,27 +1,70 @@
 package com.financetrack.model;
 
 import jakarta.persistence.*;
-
-import java.util.List;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "payment_method")
-public class PaymentMethod {
-    //Atributos relacionados a la clase PaymentMethod
-    //Llave primaria
+@Table(name = "notification")
+public class Notification {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
-    //Otros Atributos
-    @Column(name = "name", nullable = false, unique = true)
-    private String name;
+    @Column(nullable = false, length = 255)
+    private String message;
 
-    //Relaciones
-    @OneToMany(mappedBy = "paymentMethod", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Income> incomes;
+    @Column(nullable = false)
+    private LocalDate date;
 
-    @OneToMany(mappedBy = "paymentMethod", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Expense> expenses;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "user_id",
+            nullable = false,
+            foreignKey = @ForeignKey(name = "fk_notification_user")
+    )
+    private User user;
 
+    // Constructores
+    public Notification() {
+    }
+
+    public Notification(String message, LocalDate date, User user) {
+        this.message = message;
+        this.date = date;
+        this.user = user;
+    }
+
+    // Getters y Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

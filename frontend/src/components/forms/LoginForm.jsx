@@ -2,6 +2,7 @@ import { useState } from "react";
 import AuthShell from "../../pages/auth/AuthShell";
 import ErrorText from "../../components/ui/ErrorText";
 import ClayButton from "../ui/ClayButton";
+import rawFetch from "../../api/client";
 
 function LoginForm({ onGoRegister, onLoggedIn, prefillEmail }) {
   const [form, setForm] = useState({ email: prefillEmail || "", password: "" });
