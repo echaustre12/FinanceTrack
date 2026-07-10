@@ -2,6 +2,7 @@ package com.financetrack.service;
 
 import com.financetrack.model.User;
 import com.financetrack.repository.UserRepository;
+import com.financetrack.dto.RegisterRequest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

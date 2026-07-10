@@ -65,6 +65,8 @@ public class User {
     }
 
     //Getters
+    public String getPhoneNumber() { return phoneNumber; }
+
     public String getName() {
         return name;
     }

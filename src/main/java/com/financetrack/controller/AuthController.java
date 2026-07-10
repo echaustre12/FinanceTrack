@@ -1,3 +1,16 @@
+package com.financetrack.controller;
+
+import com.financetrack.dto.AuthResponse;
+import com.financetrack.dto.LoginRequest;
+import com.financetrack.dto.RegisterRequest;
+import com.financetrack.service.AuthService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
