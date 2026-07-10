@@ -1,2 +1,0 @@
-# FinanceTrack
-Personal Finance Platform
