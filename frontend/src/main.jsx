@@ -8,6 +8,7 @@ import './styles/layout.css';
 import './styles/components.css';
 import './styles/forms.css';
 import './styles/modal.css';
+import './styles/buttons.css';
 import './styles/calendar.css';
 import './styles/auth.css';
 import './styles/user-menu.css';

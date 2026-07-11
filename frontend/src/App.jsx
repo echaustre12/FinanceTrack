@@ -11,9 +11,12 @@ import {
 } from "lucide-react";
 
 import useCollection from "./hooks/useCollection";
+
 import LandingChoice from "./pages/auth/LandingChoice";
-import RegisterForm from "./components/forms/RegisterForm"
-import LoginForm from "./components/forms/LoginForm"
+import Dashboard from "./pages/dashboard/Dashboard";
+
+import RegisterForm from "./components/forms/RegisterForm";
+import LoginForm from "./components/forms/LoginForm";
 import ClayButton from "./components/ui/ClayButton";
 import Clay from "./components/ui/Clay";
 import IconChip from "./components/ui/IconChip";
@@ -23,7 +26,16 @@ import Modal from "./components/ui/Modal";
 import PaymentMethodList from "./components/ui/PaymenthMethodList";
 import Progress from "./components/ui/Progress";
 import QuickActions from "./components/ui/QuickActions";
+import Sidebar from "./components/layout/Sidebar";
+import TopBar from "./components/layout/TopBar";
+
 import rawFetch from "./api/client";
+
+import ACTIVE_MAP from "./constants/routes";
+import COLORS from "./constants/colors";
+import NAV from "./constants/navigation";
+import CAT_PALETTE from "./constants/categoryPalette";
+import API_BASE from "./api/client"
 
 export default function App() {
   const [authView, setAuthView] = useState("landing"); // landing | login | register

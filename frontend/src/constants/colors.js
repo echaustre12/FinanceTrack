@@ -4,3 +4,5 @@ export const COLORS = {
   red: { solid: "#E25555", soft: "#FBE1E1", text: "#C23E3E" },
   amber: { solid: "#E0A23B", soft: "#FBEBD3", text: "#B87F1F" },
 };
+
+export default COLORS;

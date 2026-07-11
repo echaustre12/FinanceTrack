@@ -1,3 +1,5 @@
+import COLORS from "../../constants/colors";
+
 function IconChip({ icon: Icon, color = "blue", size = 44 }) {
   const c = COLORS[color] || COLORS.blue;
   return (

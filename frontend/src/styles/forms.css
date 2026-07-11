@@ -27,6 +27,30 @@
   margin: 6px 0;
 }
 
+.error-box {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+
+  background: #FBE1E1;
+  color: #C23E3E;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  border-left: 4px solid #E25555;
+
+  animation: shake .25s ease;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-2px); }
+  100% { transform: translateX(0); }
+}
+
 .loading-text {
   color: var(--ink-soft);
   font-size: 13px;

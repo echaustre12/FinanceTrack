@@ -9,7 +9,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 
-export const NAV = [
+const NAV = [
   { key: "dashboard", label: "Inicio", icon: Home },
   { key: "plan", label: "Tu plan", icon: Wallet },
   { key: "transactions", label: "Transacciones de este mes", icon: History },
@@ -19,3 +19,5 @@ export const NAV = [
   { key: "calendar", label: "Calendario", icon: Calendar },
   { key: "savings", label: "Ahorros", icon: PiggyBank },
 ];
+
+export default NAV;

@@ -1,3 +1,7 @@
+import { ArrowDownCircle, ArrowUpCircle } from "lucide-react";
+
+import ClayButton from "./ClayButton";
+
 function QuickActions({ onExpense, onIncome }) {
   return (
     <div className="action-row">

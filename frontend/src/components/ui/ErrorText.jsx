@@ -1,3 +1,11 @@
-function ErrorText({ children }) { return children ? <p className="error-text">{children}</p> : null; }
+function ErrorText({ children }) {
+  if (!children) return null;
+
+  return (
+    <div className="error-box">
+      ⚠️ {children}
+    </div>
+  );
+}
 
 export default ErrorText;

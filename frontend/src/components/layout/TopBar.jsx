@@ -1,3 +1,7 @@
+import { Menu, ArrowLeft, Home } from "lucide-react";
+import UserMenu from "./UserMenu";
+import React, { useState } from "react";
+
 function TopBar({ title, subtitle, onBack, onHome, user, onLogout, setMobileOpen }) {
   return (
     <div className="topbar">

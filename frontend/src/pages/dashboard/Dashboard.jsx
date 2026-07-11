@@ -1,3 +1,12 @@
+import { TrendingUp, Wallet, ChevronRight, Bell } from "lucide-react";
+
+import ClayButton from "../../components/ui/ClayButton";
+import Clay from "../../components/ui/Clay";
+import IconChip from "../../components/ui/IconChip";
+import QuickActions from "../../components/ui/QuickActions";
+import FlowChart from "../../components/charts/FlowChart";
+import ExpensePie from "../../components/charts/ExpensePie";
+
 function Dashboard({ go, categoryStats, monthFlow, notifications, categories, paymentMethods, onExpense, onIncome }) {
   return (
     <>

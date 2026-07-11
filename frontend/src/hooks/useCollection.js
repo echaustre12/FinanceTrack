@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import rawFetch from "../api/client";
+
 /* Colección genérica: GET lista, POST crear, DELETE eliminar */
 function useCollection(token, path, enabled = true) {
   const [items, setItems] = useState([]);

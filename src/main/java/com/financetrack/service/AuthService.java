@@ -20,26 +20,32 @@ public class AuthService {
     public AuthResponse register(RegisterRequest request) {
 
         if (request.getName() == null || request.getName().isBlank()) {
-            throw new RuntimeException("El nombre es obligatorio.");
+            throw new IllegalArgumentException("Por favor ingresa tu nombre.");
         }
 
         if (request.getEmail() == null || request.getEmail().isBlank()) {
-            throw new RuntimeException("El correo es obligatorio.");
+            throw new IllegalArgumentException("Por favor ingresa tu correo electrónico.");
         }
 
         if (!request.getEmail().matches("^[\\w.-]+@[\\w.-]+\\.[a-zA-Z]{2,}$")) {
-            throw new RuntimeException("El formato del correo no es válido.");
+            throw new IllegalArgumentException("Ingresa un correo electrónico válido.");
         }
 
         if (request.getPassword() == null || request.getPassword().length() < 8) {
-            throw new RuntimeException(
-                    "La contraseña debe tener al menos 8 caracteres."
+            throw new IllegalArgumentException(
+                    "Por tu seguridad, la contraseña debe tener al menos 8 caracteres."
             );
         }
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new RuntimeException(
+            throw new IllegalArgumentException(
                     "Ya existe un usuario con ese correo."
+            );
+        }
+
+        if (request.getPhoneNumber() == null || request.getPhoneNumber().length() < 10) {
+            throw new IllegalArgumentException(
+                    "Ingresa un número de telefono válido."
             );
         }
 
@@ -67,8 +73,8 @@ public class AuthService {
         User user = userRepository
                 .findByEmail(request.getEmail())
                 .orElseThrow(
-                        () -> new RuntimeException(
-                                "Correo o contraseña incorrectos."
+                        () -> new IllegalArgumentException(
+                                "El correo o la contraseña son incorrectos."
                         )
                 );
 
@@ -76,8 +82,8 @@ public class AuthService {
                 request.getPassword(),
                 user.getPassword()
         )) {
-            throw new RuntimeException(
-                    "Correo o contraseña incorrectos."
+            throw new IllegalArgumentException(
+                    "El correo o la contraseña son incorrectos."
             );
         }
 

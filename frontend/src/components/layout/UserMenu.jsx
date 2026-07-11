@@ -1,3 +1,7 @@
+import React, { useState, useRef, useEffect } from "react";
+import { User, UserCircle2, LogOut } from "lucide-react";
+import Modal from "../ui/Modal";
+
 function UserMenu({ user, onLogout }) {
   const [open, setOpen] = useState(false);
   const [showInfo, setShowInfo] = useState(false);

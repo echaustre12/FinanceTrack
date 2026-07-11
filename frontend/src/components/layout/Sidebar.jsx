@@ -1,3 +1,6 @@
+import ACTIVE_MAP from "../../constants/routes";
+import NAV from "../../constants/navigation";
+
 function Sidebar({ view, setView, mobileOpen, setMobileOpen }) {
   const activeKey = ACTIVE_MAP[view] || view;
   return (

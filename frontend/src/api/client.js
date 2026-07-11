@@ -9,16 +9,19 @@ async function rawFetch(path, options = {}, token) {
       ...(options.headers || {}),
     },
   });
-  if (!res.ok) {
-    let msg = `Error ${res.status}`;
-    try {
-      const body = await res.json();
-      msg = body.message || body.error || msg;
-    } catch (_) {}
-    throw new Error(msg);
+
+  const contentType = res.headers.get("content-type");
+  let body;
+  if (contentType?.includes("application/json")) {
+    body = await res.json();
+  } else {
+    body = await res.text();
   }
-  if (res.status === 204) return null;
-  try { return await res.json(); } catch (_) { return null; }
+
+  if (!res.ok) {
+    throw new Error(body?.message || body?.error || body || `Error ${res.status}`);
+  }
+  return body;
 }
 
 export default rawFetch;
