@@ -17,6 +17,7 @@ CREATE TABLE payment_method (
 CREATE TABLE category (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
     user_id INTEGER NOT NULL,
 
     CONSTRAINT fk_category_user

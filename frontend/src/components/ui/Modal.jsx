@@ -1,3 +1,7 @@
+import { X } from "lucide-react";
+
+import Clay from "./Clay";
+
 function Modal({ title, onClose, children }) {
   return (
     <div className="modal-veil" onClick={onClose}>

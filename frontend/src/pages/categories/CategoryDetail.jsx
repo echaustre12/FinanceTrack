@@ -1,3 +1,9 @@
+import Clay from "../../components/ui/Clay";
+import Progress from "../../components/ui/Progress";
+import FlowChart from "../../components/charts/FlowChart";
+import TransactionTable from "../../components/tables/TransactionTable"
+import { fmt } from "../../hooks/useCollection";
+
 function CategoryDetail({ categoryId, go, categoryStats, categoryHistory, recurring, transactions, categories, paymentMethods }) {
   const cat = categoryStats.find((c) => c.id === categoryId);
   if (!cat) return <p className="empty">Categoría no encontrada.</p>;

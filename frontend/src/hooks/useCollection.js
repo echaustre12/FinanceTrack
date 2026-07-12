@@ -25,7 +25,7 @@ function useCollection(token, path, enabled = true) {
   return { items, loading, error, reload, create, remove };
 }
 
-const fmt = (n) =>
+export const fmt = (n) =>
   new Intl.NumberFormat("es-CO", { style: "currency", currency: "COP", maximumFractionDigits: 0 }).format(Math.round(n || 0));
 
 const monthLabel = (dateStr) => {
