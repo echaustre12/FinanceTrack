@@ -1,3 +1,12 @@
+import React, { useState } from "react";
+import { Plus, Trash2, Check, Tag, ChevronRight } from "lucide-react";
+
+import Clay from "../../components/ui/Clay";
+import ClayButton from "../../components/ui/ClayButton";
+import IconChip from "../../components/ui/IconChip";
+import ErrorText from "../../components/ui/ErrorText";
+import Modal from "../../components/ui/Modal";
+
 function CategoriesScreen({ openCategory, categories, onCreate, onDelete }) {
   const [showCreate, setShowCreate] = useState(false);
   const [showDelete, setShowDelete] = useState(false);

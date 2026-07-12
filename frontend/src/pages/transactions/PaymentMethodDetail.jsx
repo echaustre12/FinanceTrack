@@ -1,3 +1,6 @@
+import Clay from "../../components/ui/Clay";
+import TransactionTable from "../../components/tables/TransactionTable";
+
 function PaymentMethodDetail({ pmId, go, paymentMethods, pmStats, transactions, categories }) {
   const pm = paymentMethods.find((p) => p.id === pmId);
   if (!pm) return <p className="empty">Método de pago no encontrado.</p>;

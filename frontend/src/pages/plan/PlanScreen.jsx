@@ -1,3 +1,11 @@
+import { Tag } from "lucide-react";
+
+import Clay from "../../components/ui/Clay";
+import IconChip from "../../components/ui/IconChip";
+import PaymentMethodList from "../../components/ui/PaymentMethodList";
+import Progress from "../../components/ui/Progress";
+import { fmt } from "../../hooks/useCollection";
+
 function PlanScreen({ go, openCategory, categoryStats, paymentMethods, pmStats, currentPeriod, onCreatePaymentMethod }) {
   return (
     <>

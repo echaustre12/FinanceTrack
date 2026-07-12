@@ -14,6 +14,18 @@ import useCollection from "./hooks/useCollection";
 
 import LandingChoice from "./pages/auth/LandingChoice";
 import Dashboard from "./pages/dashboard/Dashboard";
+import CategoriesScreen from "./pages/categories/CategoriesScreen";
+import CategoryDetail from "./pages/categories/CategoryDetail";
+import CalendarScreen from "./pages/calendar/CalendarScreen";
+import HistoryScreen from "./pages/history/HistoryScreen";
+import HistoryMonthScreen from "./pages/history/HistoryMonthScreen";
+import HistoryCategoryScreen from "./pages/history/HistoryCategoryScreen";
+import PlanScreen from "./pages/plan/PlanScreen";
+import RecurringScreen from "./pages/recurring/RecurringScreen";
+import SavingsScreen from "./pages/savings/SavingsScreen";
+import SavingGoalDetail from "./pages/savings/SavingGoalDetail";
+import PaymentMethodDetail from "./pages/transactions/PaymentMethodDetail"
+import TransactionsScreen from "./pages/transactions/TransactionsScreen";
 
 import RegisterForm from "./components/forms/RegisterForm";
 import LoginForm from "./components/forms/LoginForm";
@@ -23,7 +35,7 @@ import IconChip from "./components/ui/IconChip";
 import ErrorText from "./components/ui/ErrorText";
 import Loading from "./components/ui/Loading";
 import Modal from "./components/ui/Modal";
-import PaymentMethodList from "./components/ui/PaymenthMethodList";
+import PaymentMethodList from "./components/ui/PaymentMethodList";
 import Progress from "./components/ui/Progress";
 import QuickActions from "./components/ui/QuickActions";
 import Sidebar from "./components/layout/Sidebar";

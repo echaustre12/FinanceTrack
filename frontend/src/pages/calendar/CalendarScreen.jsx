@@ -1,3 +1,5 @@
+import Clay from "../../components/ui/Clay";
+
 function CalendarScreen({ recurring, transactions, currentPeriod }) {
   const base = currentPeriod ? new Date(currentPeriod.startDate) : new Date();
   const year = base.getFullYear(), month = base.getMonth();
