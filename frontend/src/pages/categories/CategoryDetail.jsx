@@ -16,9 +16,9 @@ function CategoryDetail({ categoryId, go, categoryStats, categoryHistory, recurr
         <Clay>
           <h3 className="section-title">Resumen de {cat.name}</h3>
           <div className="stat-block">
-            <div><span>Presupuestado</span><b>{fmt(cat.budget)}</b></div>
-            <div><span>Gastado hasta ahora</span><b>{fmt(cat.spent)}</b></div>
-            <div><span>{remaining >= 0 ? "Te quedan" : "Excediste por"}</span><b className={remaining < 0 ? "text-red" : "text-green"}>{fmt(Math.abs(remaining))}</b></div>
+            <div><span>Presupuestado: </span><b>{fmt(cat.budget)}</b></div>
+            <div><span>Gastado hasta ahora: </span><b>{fmt(cat.spent)}</b></div>
+            <div><span>{remaining >= 0 ? "Te quedan: " : "Excediste por: "}</span><b className={remaining < 0 ? "text-red" : "text-green"}>{fmt(Math.abs(remaining))}</b></div>
           </div>
           <Progress value={cat.spent} max={cat.budget || 1} color={remaining < 0 ? "red" : cat.color} />
           {pending.length > 0 && (

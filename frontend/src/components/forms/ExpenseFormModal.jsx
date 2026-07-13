@@ -1,3 +1,10 @@
+import React, { useState } from "react";
+import { Check } from "lucide-react";
+
+import Modal from "../ui/Modal";
+import ErrorText from "../ui/ErrorText";
+import ClayButton from "../ui/ClayButton";
+
 function ExpenseFormModal({ categories, paymentMethods, onClose, onSave }) {
   const [form, setForm] = useState({ amount: "", description: "", date: "", categoryId: "", paymentMethodId: "" });
   const [error, setError] = useState(null);
