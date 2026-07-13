@@ -49,4 +49,47 @@ public class FinancialPeriod {
     @OneToMany(mappedBy = "financialPeriod", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CategoryBudget> categoryBudgets;
 
+    public int getId() {
+        return id;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

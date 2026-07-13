@@ -3,6 +3,7 @@ package com.financetrack.service;
 import com.financetrack.model.User;
 import com.financetrack.repository.UserRepository;
 import com.financetrack.dto.RegisterRequest;
+import com.financetrack.service.FinancialPeriodService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,10 +15,12 @@ public class UserService implements UserDetailsService{
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final FinancialPeriodService financialPeriodService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder){
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, FinancialPeriodService financialPeriodService){
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.financialPeriodService = financialPeriodService;
     }
 
     @Override
@@ -55,6 +58,9 @@ public class UserService implements UserDetailsService{
         user.setPhoneNumber(request.getPhoneNumber());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        return userRepository.save(user);
+        User saved = userRepository.save(user);
+        financialPeriodService.createCurrentPeriod(saved);
+
+        return saved;
     }
 }
