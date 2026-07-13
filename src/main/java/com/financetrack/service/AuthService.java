@@ -16,6 +16,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final FinancialPeriodService financialPeriodService;
 
     public AuthResponse register(RegisterRequest request) {
 
@@ -59,6 +60,8 @@ public class AuthService {
 
         user = userRepository.save(user);
 
+        financialPeriodService.createCurrentPeriod(user);
+
         String token = jwtService.generateToken(user);
 
         return new AuthResponse(
@@ -86,6 +89,8 @@ public class AuthService {
                     "El correo o la contraseña son incorrectos."
             );
         }
+
+        financialPeriodService.ensureActivePeriod(user);
 
         String token = jwtService.generateToken(user);
 
