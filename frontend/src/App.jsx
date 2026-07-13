@@ -29,6 +29,8 @@ import TransactionsScreen from "./pages/transactions/TransactionsScreen";
 
 import RegisterForm from "./components/forms/RegisterForm";
 import LoginForm from "./components/forms/LoginForm";
+import ExpenseFormModal from "./components/forms/ExpenseFormModal";
+import IncomeFormModal from "./components/forms/IncomeFormModal";
 import ClayButton from "./components/ui/ClayButton";
 import Clay from "./components/ui/Clay";
 import IconChip from "./components/ui/IconChip";

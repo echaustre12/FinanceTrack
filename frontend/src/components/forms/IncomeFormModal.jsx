@@ -1,3 +1,10 @@
+import React, { useState } from "react";
+import { Check } from "lucide-react";
+
+import Modal from "../ui/Modal";
+import ClayButton from "../ui/ClayButton";
+import ErrorText from "../ui/ErrorText";
+
 function IncomeFormModal({ paymentMethods, onClose, onSave }) {
   const [form, setForm] = useState({ amount: "", description: "", date: "", paymentMethodId: "" });
   const [error, setError] = useState(null);
@@ -36,3 +43,5 @@ function IncomeFormModal({ paymentMethods, onClose, onSave }) {
     </Modal>
   );
 }
+
+export default IncomeFormModal;

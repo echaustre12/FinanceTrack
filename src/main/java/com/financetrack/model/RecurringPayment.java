@@ -31,4 +31,22 @@ public class RecurringPayment {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    //Constructor
+    public RecurringPayment() {
+    }
+
+    //Getters y setters
+    public int getId() { return id; }
+    public String getName() { return name; }
+    public long getAmount() { return amount; }
+    public int getDayMonth() { return dayMonth; }
+    public Category getCategory() { return category; }
+    public User getUser() { return user; }
+
+    public void setName(String name) { this.name = name; }
+    public void setAmount(long amount) { this.amount = amount; }
+    public void setDayMonth(int dayMonth) { this.dayMonth = dayMonth; }
+    public void setCategory(Category category) { this.category = category; }
+    public void setUser(User user) { this.user = user; }
 }
