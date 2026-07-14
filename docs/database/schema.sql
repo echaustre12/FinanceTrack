@@ -11,7 +11,13 @@ CREATE TABLE users (
 
 CREATE TABLE payment_method (
     id SMALLSERIAL PRIMARY KEY,
-    name VARCHAR(255) UNIQUE NOT NULL
+    name VARCHAR(255) NOT NULL,
+    user_id INTEGER NOT NULL,
+
+    CONSTRAINT fk_payment_method_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE category (

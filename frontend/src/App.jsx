@@ -50,6 +50,7 @@ import COLORS from "./constants/colors";
 import NAV from "./constants/navigation";
 import CAT_PALETTE from "./constants/categoryPalette";
 import API_BASE from "./api/client"
+import { monthLabel } from "./hooks/useCollection";
 
 export default function App() {
   const [authView, setAuthView] = useState("landing"); // landing | login | register
@@ -77,6 +78,9 @@ export default function App() {
   const budgetsRaw = useCollection(token, "/api/category-budgets", authed);
   const periodsRaw = useCollection(token, "/api/financial-periods", authed);
   const notifsRaw = useCollection(token, "/api/notifications", authed);
+
+  const [editingExpense, setEditingExpense] = useState(null);
+  const [deletingExpense, setDeletingExpense] = useState(null);
 
   const categories = useMemo(() => (catsRaw.items || []).map((c, i) => ({ ...c, color: CAT_PALETTE[i % CAT_PALETTE.length] })), [catsRaw.items]);
   const paymentMethods = pmsRaw.items || [];
@@ -154,6 +158,9 @@ export default function App() {
   const createExpense = (body) => rawFetch("/api/expenses", { method: "POST", body: JSON.stringify({ ...body, financialPeriodId: currentPeriod?.id }) }, token).then(() => expensesRaw.reload());
   const createIncome = (body) => rawFetch("/api/incomes", { method: "POST", body: JSON.stringify({ ...body, financialPeriodId: currentPeriod?.id }) }, token).then(() => incomesRaw.reload());
 
+  const updateExpense = (expense) => expensesRaw.update(expense.id, expense);
+  const deleteExpense = (expense) => expensesRaw.remove(expense.id);
+
   /* -------- Not authenticated -------- */
   if (!authed) {
     return (
@@ -210,15 +217,21 @@ export default function App() {
       break;
     case "categoryDetail":
       screen = <CategoryDetail categoryId={selCategory} go={go} categoryStats={categoryStats} categoryHistory={categoryHistoryFor(selCategory)}
-        recurring={recurringRaw.items || []} transactions={monthTransactions} categories={categories} paymentMethods={paymentMethods} />;
+        recurring={recurringRaw.items || []} transactions={monthTransactions} categories={categories} paymentMethods={paymentMethods} 
+        onEditExpense={setEditingExpense}
+        onDeleteExpense={setDeletingExpense} />;
       break;
     case "transactions":
       screen = <TransactionsScreen go={go} monthFlow={monthFlow} pmStats={pmStats} paymentMethods={paymentMethods} transactions={monthTransactions}
         categories={categories} onCreatePaymentMethod={(b) => rawFetch("/api/payment-methods", { method: "POST", body: JSON.stringify(b) }, token).then(() => pmsRaw.reload())}
-        onExpense={() => setExpenseModal(true)} onIncome={() => setIncomeModal(true)} />;
+        onExpense={() => setExpenseModal(true)} onIncome={() => setIncomeModal(true)} 
+        onEditExpense={setEditingExpense}
+        onDeleteExpense={setDeletingExpense} />;
       break;
     case "paymentDetail":
-      screen = <PaymentMethodDetail pmId={selPm} go={go} paymentMethods={paymentMethods} pmStats={pmStats} transactions={monthTransactions} categories={categories} />;
+      screen = <PaymentMethodDetail pmId={selPm} go={go} paymentMethods={paymentMethods} pmStats={pmStats} transactions={monthTransactions} categories={categories}
+      onEditExpense={setEditingExpense}
+      onDeleteExpense={setDeletingExpense} />;
       break;
     case "history":
       screen = <HistoryScreen go={go} monthlyHistory={monthlyHistory} categories={categories} transactions={transactions} paymentMethods={paymentMethods} />;
@@ -263,6 +276,10 @@ export default function App() {
       </div>
       {expenseModal && <ExpenseFormModal categories={categories} paymentMethods={paymentMethods} onClose={() => setExpenseModal(false)} onSave={createExpense} />}
       {incomeModal && <IncomeFormModal paymentMethods={paymentMethods} onClose={() => setIncomeModal(false)} onSave={createIncome} />}
+      {editingExpense && (<ExpenseFormModal expense={editingExpense} categories={categories} paymentMethods={paymentMethods} onClose={() => setEditingExpense(null)} onSave={async (expense) => {await updateExpense(expense); setEditingExpense(null);}}/>)}
+      {deletingExpense && (<Modal title="Eliminar gasto" onClose={() => setDeletingExpense(null)}> <p>¿Seguro que deseas eliminar el gasto<strong> "{deletingExpense.description}"</strong>?</p>
+        <div className="modal-actions"> <ClayButton tone="soft" onClick={() => setDeletingExpense(null)}>Cancelar</ClayButton> <ClayButton tone="danger" onClick={async () => {await deleteExpense(deletingExpense); setDeletingExpense(null);}}>Eliminar</ClayButton> </div> </Modal>
+)}
     </>
   );
 }

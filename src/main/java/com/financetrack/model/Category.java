@@ -31,14 +31,17 @@ public class Category {
 
     //Una categoria tiene multiples gastos
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Expense> expenses;
 
     //Una categoria tiene multiples pagos recurrentes
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<RecurringPayment> recurringPayments;
 
     //Una categoria puede tener distintos presupuestos
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<CategoryBudget> categoryBudgets;
 
     //Getters y setters
@@ -51,4 +54,28 @@ public class Category {
     public String getName() { return this.name; }
     public boolean isActive() { return this.active; }
     public User getUser() { return this.user; }
+
+    public List<Expense> getExpenses() {
+        return expenses;
+    }
+
+    public void setExpenses(List<Expense> expenses) {
+        this.expenses = expenses;
+    }
+
+    public List<RecurringPayment> getRecurringPayments() {
+        return recurringPayments;
+    }
+
+    public void setRecurringPayments(List<RecurringPayment> recurringPayments) {
+        this.recurringPayments = recurringPayments;
+    }
+
+    public List<CategoryBudget> getCategoryBudgets() {
+        return categoryBudgets;
+    }
+
+    public void setCategoryBudgets(List<CategoryBudget> categoryBudgets) {
+        this.categoryBudgets = categoryBudgets;
+    }
 }
