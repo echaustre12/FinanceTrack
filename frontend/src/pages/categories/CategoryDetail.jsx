@@ -4,7 +4,7 @@ import FlowChart from "../../components/charts/FlowChart";
 import TransactionTable from "../../components/tables/TransactionTable"
 import { fmt } from "../../hooks/useCollection";
 
-function CategoryDetail({ categoryId, go, categoryStats, categoryHistory, recurring, transactions, categories, paymentMethods }) {
+function CategoryDetail({ categoryId, go, categoryStats, categoryHistory, recurring, transactions, categories, paymentMethods, onEditExpense, onDeleteExpense }) {
   const cat = categoryStats.find((c) => c.id === categoryId);
   if (!cat) return <p className="empty">Categoría no encontrada.</p>;
   const catTx = transactions.filter((t) => t.categoryId === categoryId);
@@ -35,7 +35,7 @@ function CategoryDetail({ categoryId, go, categoryStats, categoryHistory, recurr
       </div>
       <Clay>
         <h3 className="section-title">Transacciones</h3>
-        <TransactionTable rows={catTx} categories={categories} paymentMethods={paymentMethods} />
+        <TransactionTable rows={catTx} categories={categories} paymentMethods={paymentMethods} onEdit={onEditExpense} onDelete={onDeleteExpense}/>
       </Clay>
     </>
   );

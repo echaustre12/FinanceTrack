@@ -1,3 +1,8 @@
+import Clay from "../../components/ui/Clay";
+import FlowChart from "../../components/charts/FlowChart";
+import TransactionTable from "../../components/tables/TransactionTable";
+import { fmt } from "../../hooks/useCollection";
+
 function HistoryMonthScreen({ month, go, transactions, categories, paymentMethods }) {
   const rows = transactions.filter((t) => monthLabel(t.date) === month);
   const ingresos = rows.filter((t) => t.type === "income").reduce((s, t) => s + t.amount, 0);

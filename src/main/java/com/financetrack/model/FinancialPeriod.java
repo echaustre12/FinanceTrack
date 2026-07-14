@@ -2,6 +2,7 @@ package com.financetrack.model;
 
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -35,18 +36,22 @@ public class FinancialPeriod {
     //Un usuario tiene multiples periodos financieros
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User user;
 
     //Un periodo financiero tiene multiples gastos
     @OneToMany(mappedBy = "financialPeriod", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Expense> expenses;
 
     //Un periodo financiero tiene multiples ingresos
     @OneToMany(mappedBy = "financialPeriod", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<Income> incomes;
 
     //Un periodo financiero tiene multiples presupuestos de categoria
     @OneToMany(mappedBy = "financialPeriod", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private List<CategoryBudget> categoryBudgets;
 
     public int getId() {

@@ -5,8 +5,14 @@ import Modal from "../ui/Modal";
 import ErrorText from "../ui/ErrorText";
 import ClayButton from "../ui/ClayButton";
 
-function ExpenseFormModal({ categories, paymentMethods, onClose, onSave }) {
-  const [form, setForm] = useState({ amount: "", description: "", date: "", categoryId: "", paymentMethodId: "" });
+function ExpenseFormModal({ categories, paymentMethods, onClose, onSave, expense = null }) {
+  const [form, setForm] = useState({
+      amount: expense?.amount ?? "",
+      description: expense?.description ?? "",
+      date: expense?.date ?? "",
+      categoryId: expense?.categoryId ?? "",
+      paymentMethodId: expense?.paymentMethodId ?? ""
+  });
   const [error, setError] = useState(null);
   const [saving, setSaving] = useState(false);
   const ready = form.amount && form.description && form.date && form.categoryId && form.paymentMethodId;
@@ -24,7 +30,7 @@ function ExpenseFormModal({ categories, paymentMethods, onClose, onSave }) {
   };
 
   return (
-    <Modal title="Registrar gasto" onClose={onClose}>
+    <Modal title={expense ? "Editar gasto" : "Registrar gasto"} onClose={onClose}>
       <label className="field-label">Cantidad</label>
       <input className="clay-input" type="number" value={form.amount} onChange={(e) => setForm({ ...form, amount: e.target.value })} placeholder="Ej. 45000" />
       <label className="field-label">Descripción</label>
@@ -43,7 +49,7 @@ function ExpenseFormModal({ categories, paymentMethods, onClose, onSave }) {
       </select>
       <ErrorText>{error}</ErrorText>
       <ClayButton tone="ink" style={{ marginTop: 14 }} icon={Check} disabled={saving} onClick={submit}>
-        {saving ? "Guardando..." : "Guardar gasto"}
+        {saving ? "Guardando..." : expense ? "Actualizar gasto" : "Guardar gasto"}
       </ClayButton>
     </Modal>
   );

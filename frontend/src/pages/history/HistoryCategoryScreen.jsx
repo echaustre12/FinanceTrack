@@ -1,3 +1,9 @@
+import { ResponsiveContainer, BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
+
+import Clay from "../../components/ui/Clay";
+import { fmt } from "../../hooks/useCollection";
+import COLORS from "../../constants/colors";
+
 function HistoryCategoryScreen({ categoryId, go, categories, transactions }) {
   const cat = categories.find((c) => c.id === categoryId);
   if (!cat) return <p className="empty">Categoría no encontrada.</p>;

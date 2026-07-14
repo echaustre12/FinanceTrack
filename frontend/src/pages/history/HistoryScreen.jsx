@@ -1,3 +1,11 @@
+import React, { useState } from "react";
+import { ResponsiveContainer, BarChart, Bar, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
+
+import Clay from "../../components/ui/Clay";
+import ClayButton from "../../components/ui/ClayButton";
+import { fmt } from "../../hooks/useCollection";
+import COLORS from "../../constants/colors";
+
 function HistoryScreen({ go, monthlyHistory, categories, transactions, paymentMethods }) {
   const avgIncome = monthlyHistory.length ? monthlyHistory.reduce((s, m) => s + m.ingresos, 0) / monthlyHistory.length : 0;
   const avgExpense = monthlyHistory.length ? monthlyHistory.reduce((s, m) => s + m.gastos, 0) / monthlyHistory.length : 0;

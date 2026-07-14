@@ -1,10 +1,11 @@
 import Clay from "../../components/ui/Clay";
 import FlowChart from "../../components/charts/FlowChart";
-import PaymentMethodDetail from "./PaymentMethodDetail";
 import QuickActions from "../../components/ui/QuickActions";
 import { fmt } from "../../hooks/useCollection";
+import PaymentMethodList from "../../components/ui/PaymentMethodList";
+import TransactionTable from "../../components/tables/TransactionTable";
 
-function TransactionsScreen({ go, monthFlow, pmStats, paymentMethods, transactions, categories, onCreatePaymentMethod, onExpense, onIncome }) {
+function TransactionsScreen({ go, monthFlow, pmStats, paymentMethods, transactions, categories, onCreatePaymentMethod, onExpense, onIncome, onEditExpense, onDeleteExpense }) {
   const totalReceived = Object.values(pmStats).reduce((s, v) => s + v.received, 0);
   return (
     <>
@@ -23,7 +24,7 @@ function TransactionsScreen({ go, monthFlow, pmStats, paymentMethods, transactio
       <Clay><QuickActions onExpense={onExpense} onIncome={onIncome} /></Clay>
       <Clay>
         <h3 className="section-title">Transacciones</h3>
-        <TransactionTable rows={transactions} categories={categories} paymentMethods={paymentMethods} />
+        <TransactionTable rows={transactions} categories={categories} paymentMethods={paymentMethods} onEdit={onEditExpense} onDelete={onDeleteExpense} />
       </Clay>
     </>
   );

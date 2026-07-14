@@ -1,3 +1,16 @@
+import {
+  ResponsiveContainer,
+  AreaChart,
+  Area,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip
+} from "recharts";
+
+import { fmt } from "../../hooks/useCollection";
+import COLORS from "../../constants/colors";
+
 function FlowChart({ data, height = 200 }) {
   if (!data || data.length === 0) return <p className="empty">Sin movimientos para graficar todavía.</p>;
   return (

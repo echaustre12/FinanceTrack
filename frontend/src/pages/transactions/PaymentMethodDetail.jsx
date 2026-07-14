@@ -1,7 +1,8 @@
 import Clay from "../../components/ui/Clay";
 import TransactionTable from "../../components/tables/TransactionTable";
+import { fmt } from "../../hooks/useCollection";
 
-function PaymentMethodDetail({ pmId, go, paymentMethods, pmStats, transactions, categories }) {
+function PaymentMethodDetail({ pmId, go, paymentMethods, pmStats, transactions, categories, onEditExpense, onDeleteExpense }) {
   const pm = paymentMethods.find((p) => p.id === pmId);
   if (!pm) return <p className="empty">Método de pago no encontrado.</p>;
   const stats = pmStats[pmId] || { received: 0, spent: 0 };
@@ -33,7 +34,7 @@ function PaymentMethodDetail({ pmId, go, paymentMethods, pmStats, transactions, 
       </div>
       <Clay>
         <h3 className="section-title">Transacciones</h3>
-        <TransactionTable rows={pmTx} categories={categories} paymentMethods={paymentMethods} />
+        <TransactionTable rows={pmTx} categories={categories} paymentMethods={paymentMethods} onEdit={onEditExpense} onDelete={onDeleteExpense} />
       </Clay>
     </>
   );

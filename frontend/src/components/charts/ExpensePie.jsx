@@ -1,3 +1,14 @@
+import {
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip
+} from "recharts";
+
+import { fmt } from "../../hooks/useCollection";
+import COLORS from "../../constants/colors";
+
 function ExpensePie({ categoryStats, height = 200, innerRadius = 55 }) {
   const data = categoryStats.filter((c) => c.spent > 0).map((c) => ({ name: c.name, value: c.spent, color: COLORS[c.color]?.solid || COLORS.blue.solid }));
   if (data.length === 0) return <p className="empty">Aún no registras gastos este mes.</p>;
