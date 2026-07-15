@@ -4,6 +4,7 @@ import { ResponsiveContainer, BarChart, Bar, CartesianGrid, XAxis, YAxis, Toolti
 import Clay from "../../components/ui/Clay";
 import ClayButton from "../../components/ui/ClayButton";
 import { fmt } from "../../hooks/useCollection";
+import { monthLabel } from "../../hooks/useCollection";
 import COLORS from "../../constants/colors";
 
 function HistoryScreen({ go, monthlyHistory, categories, transactions, paymentMethods }) {
@@ -27,18 +28,35 @@ function HistoryScreen({ go, monthlyHistory, categories, transactions, paymentMe
       <div className="grid grid--2">
         <Clay>
           <h3 className="section-title">Tendencias mensuales</h3>
-          <div className="stat-block">
-            <div><span>Promedio de ingresos mensual</span><b>{fmt(avgIncome)}</b></div>
-            <div><span>Promedio de gastos mensual</span><b>{fmt(avgExpense)}</b></div>
-            <div><span>Categoría con mayor gasto</span><b>{topCat?.name || "—"}</b></div>
-            <div><span>Medio de pago más usado</span><b>{topPm?.name || "—"}</b></div>
-            <div><span>Balance mensual promedio</span><b className={avgIncome - avgExpense >= 0 ? "text-green" : "text-red"}>{fmt(avgIncome - avgExpense)}</b></div>
+          <div className="stats-grid">
+            <div className="stat-item">
+              <span>Promedio de ingresos</span>
+              <b className="text-green">{fmt(avgIncome)}</b>
+            </div>
+            <div className="stat-item">
+              <span>Promedio de gastos</span>
+              <b className="text-red">{fmt(avgExpense)}</b>
+            </div>
+            <div className="stat-item">
+              <span>Categoría con mayor gasto</span>
+              <b>{topCat?.name || "—"}</b>
+            </div>
+            <div className="stat-item">
+              <span>Medio de pago más usado</span>
+              <b>{topPm?.name || "—"}</b>
+            </div>
+            <div className="stat-item">
+              <span>Balance mensual promedio</span>
+              <b className={avgIncome - avgExpense >= 0 ? "text-green" : "text-red"}>
+                {fmt(avgIncome - avgExpense)}
+              </b>
+            </div>
           </div>
         </Clay>
         <Clay>
           <h3 className="section-title">Consolidado mensual</h3>
           {monthlyHistory.length === 0 ? <p className="empty">Aún no hay historial suficiente.</p> : (
-            <ResponsiveContainer width="100%" height={210}>
+            <ResponsiveContainer width="100%" height={320}>
               <BarChart data={monthlyHistory} barGap={6}>
                 <CartesianGrid strokeDasharray="4 6" vertical={false} stroke="#D9E1EE" />
                 <XAxis dataKey="label" tick={{ fontSize: 11, fill: "#7686A3" }} axisLine={false} tickLine={false} />

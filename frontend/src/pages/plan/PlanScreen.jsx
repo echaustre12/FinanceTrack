@@ -13,7 +13,7 @@ function PlanScreen({ go, openCategory, categoryStats, paymentMethods, pmStats, 
         <Clay className="fade-in">
           <PaymentMethodList paymentMethods={paymentMethods} stats={pmStats} onOpen={(id) => go("paymentDetail", id)} onCreate={onCreatePaymentMethod} />
         </Clay>
-        <div className="grid grid--2 grid--nogap-parent">
+        <div className="grid grid--nogap-parent">
           {categoryStats.length === 0 && <p className="empty">Aún no tienes categorías creadas.</p>}
           {categoryStats.map((c, i) => {
             const remaining = c.budget - c.spent;
@@ -25,9 +25,20 @@ function PlanScreen({ go, openCategory, categoryStats, paymentMethods, pmStats, 
                 </div>
                 <Progress value={c.spent} max={c.budget || 1} color={over ? "red" : c.color} />
                 <div className="cat-stats">
-                  <span>Presupuestado: <b>{fmt(c.budget)}</b></span>
-                  <span>Gastado: <b>{fmt(c.spent)}</b></span>
-                  <span className={over ? "text-red" : ""}>{over ? "Te excediste: " : "Te quedan: "}<b>{fmt(Math.abs(remaining))}</b></span>
+                  <div className="stat-item">
+                    <span>Presupuestado</span>
+                    <b>{fmt(c.budget)}</b>
+                  </div>
+
+                  <div className="stat-item">
+                    <span>Gastado</span>
+                    <b>{fmt(c.spent)}</b>
+                  </div>
+
+                  <div className={`stat-item ${over ? "text-red" : ""}`}>
+                    <span>{over ? "Te excediste" : "Te quedan"}</span>
+                    <b>{fmt(Math.abs(remaining))}</b>
+                  </div>
                 </div>
               </Clay>
             );

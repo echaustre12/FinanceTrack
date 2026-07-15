@@ -1,17 +1,19 @@
 import Clay from "../../components/ui/Clay";
 
 function CalendarScreen({ recurring, transactions, currentPeriod }) {
-  const base = currentPeriod ? new Date(currentPeriod.startDate) : new Date();
-  const year = base.getFullYear(), month = base.getMonth();
+  const [periodYear, periodMonth] = currentPeriod
+    ? currentPeriod.startDate.split("-").map(Number)
+    : [new Date().getFullYear(), new Date().getMonth() + 1];
+  const year = periodYear;
+  const month = periodMonth - 1;
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstWeekday = new Date(year, month, 1).getDay();
 
   const events = {};
   recurring.forEach((r) => { events[r.dayMonth] = [...(events[r.dayMonth] || []), { label: r.name, tone: "amber" }]; });
   transactions.forEach((t) => {
-    const d = new Date(t.date);
-    if (d.getFullYear() === year && d.getMonth() === month) {
-      const day = d.getDate();
+    const [txYear, txMonth, day] = t.date.split("-").map(Number);
+    if (txYear === year && txMonth - 1 === month) {
       if (t.type === "income") events[day] = [...(events[day] || []), { label: t.description, tone: "green" }];
       else if (t.amount > 100000) events[day] = [...(events[day] || []), { label: t.description, tone: "red" }];
     }

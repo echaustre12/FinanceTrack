@@ -68,3 +68,27 @@
   background: #DCF3E9;
   color: #1F8F62;
 }
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.dot--amber {
+  background: #FBEBD3;
+  border: 1px solid #B87F1F;
+}
+
+.dot--green {
+  background: #DCF3E9;
+  border: 1px solid #1F8F62;
+}
+
+.dot--red {
+  background: #FBE1E1;
+  border: 1px solid #C23E3E;
+}

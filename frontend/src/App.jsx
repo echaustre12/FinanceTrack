@@ -42,6 +42,8 @@ import Progress from "./components/ui/Progress";
 import QuickActions from "./components/ui/QuickActions";
 import Sidebar from "./components/layout/Sidebar";
 import TopBar from "./components/layout/TopBar";
+import {buildAccumulatedFlow} from "./components/charts/chart";
+import TransactionTable from "./components/tables/TransactionTable";
 
 import rawFetch from "./api/client";
 
@@ -116,10 +118,7 @@ export default function App() {
     return map;
   }, [paymentMethods, monthTransactions]);
 
-  const monthFlow = useMemo(() => {
-    return [...monthTransactions].sort((a, b) => new Date(a.date) - new Date(b.date))
-      .map((t) => ({ label: t.date?.slice(8, 10), value: t.type === "income" ? t.amount : -t.amount }));
-  }, [monthTransactions]);
+  const monthFlow = useMemo(() => buildAccumulatedFlow(monthTransactions), [monthTransactions]);
 
   const categoryHistoryFor = (categoryId) => {
     const grouped = {};

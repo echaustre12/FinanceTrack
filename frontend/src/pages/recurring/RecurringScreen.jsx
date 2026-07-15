@@ -21,12 +21,22 @@ function RecurringScreen({ items, categories, onCreate, onDelete }) {
       <div className="grid grid--2">
         {items.length === 0 && <p className="empty">Aún no tienes pagos recurrentes definidos.</p>}
         {items.map((p, i) => (
-          <Clay key={p.id} className="fade-in" style={{ animationDelay: `${i * 50}ms` }}>
+          <Clay 
+            key={p.id} 
+            className="fade-in recurring-card" 
+            style={{ animationDelay: `${i * 50}ms` }}
+          >
             <h4>{p.name}</h4>
-            <div className="stat-block">
-              <div><span>Categoría: </span><b>{categories.find((c) => c.id === p.categoryId)?.name || "—"}</b></div>
-              <div><span>Cantidad: </span><b>{fmt(p.amount)}</b></div>
-              <div><span>Día del mes: </span><b>{p.dayMonth}</b></div>
+            <div className="recurring-info">
+              <span>
+                Categoría: <b>{categories.find((c) => c.id === p.categoryId)?.name || "—"}</b>
+              </span>
+              <span>
+                Cantidad a pagar: <b>{fmt(p.amount)}</b>
+              </span>
+              <span>
+                Día del mes: <b>{p.dayMonth}</b>
+              </span>
             </div>
           </Clay>
         ))}
