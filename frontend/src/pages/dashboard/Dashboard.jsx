@@ -31,7 +31,7 @@ function Dashboard({ go, categoryStats, monthFlow, notifications, categories, pa
       </Clay>
       <Clay className="fade-in" style={{ animationDelay: "180ms" }}>
         <div className="card-head">
-          <div className="card-head-left"><IconChip icon={Bell} color="amber" /><h3>Recordatorios</h3></div>
+          <div className="card-head-left title-space"><IconChip icon={Bell} color="amber" /><h3>Recordatorios</h3></div>
         </div>
         {notifications.length === 0
           ? <p className="empty">No tienes recordatorios pendientes.</p>

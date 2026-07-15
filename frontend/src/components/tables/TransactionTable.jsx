@@ -6,23 +6,36 @@ import { fmt } from "../../hooks/useCollection";
 
 function TransactionTable({ rows, categories, paymentMethods, onEdit, onDelete }) {
   if (!rows.length) return <p className="empty">Aún no hay movimientos registrados.</p>;
+
   return (
     <div className="tx-table">
       {rows.map((t) => {
         const pm = paymentMethods.find((p) => p.id === t.paymentMethodId);
         const cat = t.categoryId ? categories.find((c) => c.id === t.categoryId) : null;
+
         return (
           <div className="tx-row" key={`${t.type}-${t.id}`}>
-            <IconChip icon={t.type === "income" ? TrendingUp : TrendingDown} color={t.type === "income" ? "green" : "red"} size={36} />
-            <div className="tx-row-mid">
+            <IconChip
+              icon={t.type === "income" ? TrendingUp : TrendingDown}
+              color={t.type === "income" ? "green" : "red"}
+              size={36}
+            />
+
+            <div className="tx-info">
               <strong>{t.description}</strong>
-              <span>{t.date} · {pm?.name || "—"}{cat ? ` · ${cat.name}` : ""}</span>
+
+              <div className="tx-details">
+                <span>{t.date}</span>
+                <span>{pm?.name || "—"}</span>
+                {cat && <span>{cat.name}</span>}
+              </div>
             </div>
-            <div className="tx-row-right">
+
+            <div className="tx-value">
               <b className={t.type === "income" ? "text-green" : "text-red"}>
-                {t.type === "income" ? "+" : "-"}
-                {fmt(t.amount)}
+                {t.type === "income" ? "+" : "-"}{fmt(t.amount)}
               </b>
+
               {t.type === "expense" && (
                 <div className="tx-actions">
                   <ClayButton
@@ -30,6 +43,7 @@ function TransactionTable({ rows, categories, paymentMethods, onEdit, onDelete }
                     icon={Pencil}
                     onClick={() => onEdit?.(t)}
                   />
+
                   <ClayButton
                     tone="soft-red"
                     icon={Trash2}
@@ -38,7 +52,6 @@ function TransactionTable({ rows, categories, paymentMethods, onEdit, onDelete }
                 </div>
               )}
             </div>
-
           </div>
         );
       })}

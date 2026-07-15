@@ -17,23 +17,20 @@ function PaymentMethodDetail({ pmId, go, paymentMethods, pmStats, transactions, 
         <Clay>
           <h3 className="section-title">{pm.name}</h3>
           <div className="stat-block">
-            <div><span>Recibido</span><b>{fmt(stats.received)}</b></div>
-            <div><span>Gastado hasta ahora</span><b>{fmt(stats.spent)}</b></div>
-            <div><span>Te quedan</span><b className="text-green">{fmt(stats.received - stats.spent)}</b></div>
+            <div><span>Recibido: </span><b>{fmt(stats.received)}</b></div>
+            <div><span>Gastado hasta ahora: </span><b>{fmt(stats.spent)}</b></div>
+            <div><span>Te quedan: </span><b className="text-green">{fmt(stats.received - stats.spent)}</b></div>
           </div>
           {topCat && (
             <>
-              <h4 className="mt">Categoría con más gastos</h4>
-              <div className="mini-row"><span>{topCat.name}</span><b>{fmt(topCatEntry[1])}</b></div>
+              <h4 className="mt title-space">Categoría con más gastos</h4>
+              <div className="mini-row"><span>{topCat.name}: </span><b>{fmt(topCatEntry[1])}</b></div>
             </>
           )}
         </Clay>
-        <Clay>
-          <h3 className="section-title">Transacciones de este medio</h3>
-        </Clay>
       </div>
       <Clay>
-        <h3 className="section-title">Transacciones</h3>
+        <h4 className="mt title-space">Transacciones</h4>
         <TransactionTable rows={pmTx} categories={categories} paymentMethods={paymentMethods} onEdit={onEditExpense} onDelete={onDeleteExpense} />
       </Clay>
     </>

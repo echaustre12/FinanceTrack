@@ -3,6 +3,7 @@ import { ResponsiveContainer, BarChart, Bar, CartesianGrid, XAxis, YAxis, Toolti
 import Clay from "../../components/ui/Clay";
 import { fmt } from "../../hooks/useCollection";
 import COLORS from "../../constants/colors";
+import { monthLabel } from "../../hooks/useCollection";
 
 function HistoryCategoryScreen({ categoryId, go, categories, transactions }) {
   const cat = categories.find((c) => c.id === categoryId);
@@ -33,10 +34,23 @@ function HistoryCategoryScreen({ categoryId, go, categories, transactions }) {
       </Clay>
       <Clay>
         <h3 className="section-title">Tendencias de la categoría</h3>
-        <div className="stat-block">
-          <div><span>Mes con mayor gasto</span><b>{sorted[0]?.label || "—"} · {fmt(sorted[0]?.gastos || 0)}</b></div>
-          <div><span>Mes con menor gasto</span><b>{sorted[sorted.length - 1]?.label || "—"} · {fmt(sorted[sorted.length - 1]?.gastos || 0)}</b></div>
-          <div><span>Gasto mensual real promedio</span><b>{fmt(avg)}</b></div>
+        <div className="stats-grid">
+          <div className="stat-item">
+            <span>Mes con mayor gasto</span>
+            <b>
+              {sorted[0]?.label || "—"} · {fmt(sorted[0]?.gastos || 0)}
+            </b>
+          </div>
+          <div className="stat-item">
+            <span>Mes con menor gasto</span>
+            <b>
+              {sorted[sorted.length - 1]?.label || "—"} · {fmt(sorted[sorted.length - 1]?.gastos || 0)}
+            </b>
+          </div>
+          <div className="stat-item">
+            <span>Gasto mensual promedio</span>
+            <b>{fmt(avg)}</b>
+          </div>
         </div>
       </Clay>
     </>

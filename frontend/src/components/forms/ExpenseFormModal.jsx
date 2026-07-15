@@ -22,7 +22,7 @@ function ExpenseFormModal({ categories, paymentMethods, onClose, onSave, expense
     setSaving(true); setError(null);
     try {
       await onSave({
-        amount: Number(form.amount), description: form.description, date: form.date,
+        id: expense?.id, amount: Number(form.amount), description: form.description, date: form.date,
         categoryId: Number(form.categoryId), paymentMethodId: Number(form.paymentMethodId),
       });
       onClose();

@@ -36,3 +36,7 @@ b,
 .mono {
   font-family: 'IBM Plex Mono', monospace;
 }
+
+.title-space {
+  margin-top: 15px;
+}
