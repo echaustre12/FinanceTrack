@@ -37,6 +37,7 @@ import IconChip from "./components/ui/IconChip";
 import ErrorText from "./components/ui/ErrorText";
 import Loading from "./components/ui/Loading";
 import Modal from "./components/ui/Modal";
+import ConfirmModal from "./components/ui/ConfirmModal";
 import PaymentMethodList from "./components/ui/PaymentMethodList";
 import Progress from "./components/ui/Progress";
 import QuickActions from "./components/ui/QuickActions";
@@ -83,6 +84,9 @@ export default function App() {
 
   const [editingExpense, setEditingExpense] = useState(null);
   const [deletingExpense, setDeletingExpense] = useState(null);
+
+  const [editingIncome,setEditingIncome]=useState(null);
+  const [deletingIncome,setDeletingIncome]=useState(null);
 
   const categories = useMemo(() => (catsRaw.items || []).map((c, i) => ({ ...c, color: CAT_PALETTE[i % CAT_PALETTE.length] })), [catsRaw.items]);
   const paymentMethods = pmsRaw.items || [];
@@ -160,6 +164,9 @@ export default function App() {
   const updateExpense = (expense) => expensesRaw.update(expense.id, expense);
   const deleteExpense = (expense) => expensesRaw.remove(expense.id);
 
+  const updateIncome = (income) => incomesRaw.update(income.id,income);
+  const deleteIncome = (income) => incomesRaw.remove(income.id);
+
   /* -------- Not authenticated -------- */
   if (!authed) {
     return (
@@ -225,7 +232,9 @@ export default function App() {
         categories={categories} onCreatePaymentMethod={(b) => rawFetch("/api/payment-methods", { method: "POST", body: JSON.stringify(b) }, token).then(() => pmsRaw.reload())}
         onExpense={() => setExpenseModal(true)} onIncome={() => setIncomeModal(true)} 
         onEditExpense={setEditingExpense}
-        onDeleteExpense={setDeletingExpense} />;
+        onDeleteExpense={setDeletingExpense} 
+        onEditIncome={setEditingIncome}
+        onDeleteIncome={setDeletingIncome} />;
       break;
     case "paymentDetail":
       screen = <PaymentMethodDetail pmId={selPm} go={go} paymentMethods={paymentMethods} pmStats={pmStats} transactions={monthTransactions} categories={categories}
@@ -276,9 +285,29 @@ export default function App() {
       {expenseModal && <ExpenseFormModal categories={categories} paymentMethods={paymentMethods} onClose={() => setExpenseModal(false)} onSave={createExpense} />}
       {incomeModal && <IncomeFormModal paymentMethods={paymentMethods} onClose={() => setIncomeModal(false)} onSave={createIncome} />}
       {editingExpense && (<ExpenseFormModal expense={editingExpense} categories={categories} paymentMethods={paymentMethods} onClose={() => setEditingExpense(null)} onSave={async (expense) => {await updateExpense(expense); setEditingExpense(null);}}/>)}
-      {deletingExpense && (<Modal title="Eliminar gasto" onClose={() => setDeletingExpense(null)}> <p>¿Seguro que deseas eliminar el gasto<strong> "{deletingExpense.description}"</strong>?</p>
-        <div className="modal-actions"> <ClayButton tone="soft" onClick={() => setDeletingExpense(null)}>Cancelar</ClayButton> <ClayButton tone="danger" onClick={async () => {await deleteExpense(deletingExpense); setDeletingExpense(null);}}>Eliminar</ClayButton> </div> </Modal>
-)}
+      {deletingExpense && (
+        <ConfirmModal
+          title="Eliminar gasto"
+          message={`¿Seguro que deseas eliminar "${deletingExpense.description}"? Esta acción no se puede deshacer.`}
+          onClose={() => setDeletingExpense(null)}
+          onConfirm={async () => {
+            await deleteExpense(deletingExpense);
+            setDeletingExpense(null);
+          }}
+        />
+      )}
+      {editingIncome && (<IncomeFormModal income={editingIncome} paymentMethods={paymentMethods} onClose={() => setEditingIncome(null)} onSave={async (income) => {await updateIncome(income);setEditingIncome(null);}}/>)}
+      {deletingIncome && (
+        <ConfirmModal
+          title="Eliminar ingreso"
+          message={`¿Seguro que deseas eliminar "${deletingIncome.description}"? Esta acción no se puede deshacer.`}
+          onClose={() => setDeletingIncome(null)}
+          onConfirm={async () => {
+            await deleteIncome(deletingIncome);
+            setDeletingIncome(null);
+          }}
+        />
+      )}
     </>
   );
 }

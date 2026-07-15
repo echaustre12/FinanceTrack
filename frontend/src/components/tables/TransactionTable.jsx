@@ -35,22 +35,18 @@ function TransactionTable({ rows, categories, paymentMethods, onEdit, onDelete }
               <b className={t.type === "income" ? "text-green" : "text-red"}>
                 {t.type === "income" ? "+" : "-"}{fmt(t.amount)}
               </b>
-
-              {t.type === "expense" && (
-                <div className="tx-actions">
-                  <ClayButton
-                    tone="soft-blue"
-                    icon={Pencil}
-                    onClick={() => onEdit?.(t)}
-                  />
-
-                  <ClayButton
-                    tone="soft-red"
-                    icon={Trash2}
-                    onClick={() => onDelete?.(t)}
-                  />
-                </div>
-              )}
+              <div className="tx-actions">
+                <ClayButton
+                  tone="soft-blue"
+                  icon={Pencil}
+                  onClick={() => onEdit?.(t)}
+                />
+                <ClayButton
+                  tone="soft-red"
+                  icon={Trash2}
+                  onClick={() => onDelete?.(t)}
+                />
+              </div>
             </div>
           </div>
         );
