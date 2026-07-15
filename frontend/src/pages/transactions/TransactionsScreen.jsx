@@ -5,7 +5,7 @@ import { fmt } from "../../hooks/useCollection";
 import PaymentMethodList from "../../components/ui/PaymentMethodList";
 import TransactionTable from "../../components/tables/TransactionTable";
 
-function TransactionsScreen({ go, monthFlow, pmStats, paymentMethods, transactions, categories, onCreatePaymentMethod, onExpense, onIncome, onEditExpense, onDeleteExpense }) {
+function TransactionsScreen({ go, monthFlow, pmStats, paymentMethods, transactions, categories, onCreatePaymentMethod, onExpense, onIncome, onEditExpense, onDeleteExpense, onEditIncome, onDeleteIncome }) {
   const totalReceived = Object.values(pmStats).reduce((s, v) => s + v.received, 0);
   return (
     <>
@@ -24,7 +24,21 @@ function TransactionsScreen({ go, monthFlow, pmStats, paymentMethods, transactio
       <Clay><QuickActions onExpense={onExpense} onIncome={onIncome} /></Clay>
       <Clay>
         <h3 className="section-title title-space">Transacciones</h3>
-        <TransactionTable rows={transactions} categories={categories} paymentMethods={paymentMethods} onEdit={onEditExpense} onDelete={onDeleteExpense} />
+        <TransactionTable 
+          rows={transactions}
+          categories={categories}
+          paymentMethods={paymentMethods}
+          onEdit={(transaction) =>
+            transaction.type === "expense"
+              ? onEditExpense?.(transaction)
+              : onEditIncome?.(transaction)
+          }
+          onDelete={(transaction) =>
+            transaction.type === "expense"
+              ? onDeleteExpense?.(transaction)
+              : onDeleteIncome?.(transaction)
+          }
+        />
       </Clay>
     </>
   );
