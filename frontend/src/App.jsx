@@ -227,7 +227,7 @@ export default function App() {
 
   switch (view) {
     case "dashboard":
-      screen = <Dashboard go={go} categoryStats={categoryStats} monthFlow={monthFlow} notifications={notifsRaw.items || []}
+      screen = <Dashboard go={go} categoryStats={categoryStats} monthFlow={monthFlow} notifications={notifsRaw.items || []} recurringPayments={recurringRaw.items || []}
         categories={categories} paymentMethods={paymentMethods} onExpense={() => setExpenseModal(true)} onIncome={() => setIncomeModal(true)} />;
       break;
     case "plan":
