@@ -4,6 +4,8 @@ import com.financetrack.model.User;
 import com.financetrack.repository.UserRepository;
 import com.financetrack.dto.RegisterRequest;
 import com.financetrack.service.FinancialPeriodService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -62,5 +64,22 @@ public class UserService implements UserDetailsService{
         financialPeriodService.createCurrentPeriod(saved);
 
         return saved;
+    }
+
+    public User getAuthenticatedUser() {
+        Authentication authentication =
+                SecurityContextHolder
+                        .getContext()
+                        .getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new RuntimeException("Usuario no autenticado");
+        }
+        String email = authentication.getName();
+        return userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(
+                                "Usuario no encontrado"
+                        )
+                );
     }
 }

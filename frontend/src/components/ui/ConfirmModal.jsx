@@ -7,7 +7,8 @@ function ConfirmModal({
   confirmText = "Eliminar",
   cancelText = "Cancelar",
   onClose,
-  onConfirm
+  onConfirm,
+  children
 }) {
   return (
     <Modal onClose={onClose}>
@@ -20,6 +21,8 @@ function ConfirmModal({
         <p>
           {message}
         </p>
+
+        {children}
 
         <div className="confirm-actions">
           <ClayButton

@@ -88,6 +88,9 @@ export default function App() {
   const [editingIncome,setEditingIncome]=useState(null);
   const [deletingIncome,setDeletingIncome]=useState(null);
 
+  const [editingGoal,setEditingGoal] = useState(null);
+  const [deletingGoal,setDeletingGoal] = useState(null);
+
   const categories = useMemo(() => (catsRaw.items || []).map((c, i) => ({ ...c, color: CAT_PALETTE[i % CAT_PALETTE.length] })), [catsRaw.items]);
   const paymentMethods = pmsRaw.items || [];
   const currentPeriod = useMemo(() => {
@@ -167,6 +170,16 @@ export default function App() {
   const updateIncome = (income) => incomesRaw.update(income.id,income);
   const deleteIncome = (income) => incomesRaw.remove(income.id);
 
+  const updateSavingGoal = (goal) =>
+    rawFetch(`/api/saving-goals/${goal.id}`,
+      { method:"PUT", body:JSON.stringify({name:goal.name, targetAmount:goal.targetAmount})},
+      token).then(()=>savingsRaw.reload());
+
+  const deleteSavingGoal = (id, body = {}) =>
+    rawFetch(`/api/saving-goals/${id}`,
+      {method: "DELETE", body: JSON.stringify(body)},
+      token).then(() => savingsRaw.reload());
+  
   /* -------- Not authenticated -------- */
   if (!authed) {
     return (
@@ -261,7 +274,7 @@ export default function App() {
       screen = <CalendarScreen recurring={recurringRaw.items || []} transactions={monthTransactions} currentPeriod={currentPeriod} />;
       break;
     case "savings":
-      screen = <SavingsScreen openGoal={(id) => go("savingDetail", id)} items={savingsRaw.items || []} onCreate={(b) => savingsRaw.create(b)} onDelete={(id) => savingsRaw.remove(id)} />;
+      screen = <SavingsScreen openGoal={(id) => go("savingDetail", id)} items={savingsRaw.items || []} onCreate={(b) => savingsRaw.create(b)} onUpdate={updateSavingGoal} onDelete={deleteSavingGoal} />;
       break;
     case "savingDetail":
       screen = <SavingGoalDetail goalId={selGoal} go={go} items={savingsRaw.items || []} token={token} />;
