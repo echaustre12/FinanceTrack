@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+import COLORS from "../../constants/colors";
+
 function GoalRing({ pct, size = 190, color = "blue" }) {
   const [animated, setAnimated] = useState(0);
   useEffect(() => { const t = setTimeout(() => setAnimated(pct), 120); return () => clearTimeout(t); }, [pct]);
