@@ -127,10 +127,7 @@ public class SavingGoalServiceImpl implements SavingGoalService {
             int id,
             DeleteSavingGoalRequest request
     ) {
-
         User user = userService.getAuthenticatedUser();
-
-
         SavingGoal goal =
                 savingGoalRepository
                         .findByIdAndUser(id, user)
@@ -139,19 +136,8 @@ public class SavingGoalServiceImpl implements SavingGoalService {
                                         "Meta de ahorro no encontrada"
                                 )
                         );
-
-
-        BigDecimal amount =
-                goal.getCurrentAmount();
-
-
-        /*
-         * Si la meta tiene dinero acumulado,
-         * se transfiere a otra meta existente.
-         */
-        if (amount.compareTo(BigDecimal.ZERO) > 0) {
-
-
+        BigDecimal amount = goal.getCurrentAmount();
+        if (amount.compareTo(BigDecimal.ZERO) > 0 && amount.compareTo(goal.getTargetAmount()) < 0) {
             SavingGoal destinationGoal =
                     savingGoalRepository
                             .findByIdAndUser(
@@ -163,8 +149,6 @@ public class SavingGoalServiceImpl implements SavingGoalService {
                                             "Meta destino no encontrada"
                                     )
                             );
-
-
             if (destinationGoal.getId() == goal.getId()) {
                 throw new RuntimeException(
                         "No puede transferir una meta a sí misma"
