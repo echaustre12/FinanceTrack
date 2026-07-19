@@ -277,7 +277,7 @@ export default function App() {
       screen = <SavingsScreen openGoal={(id) => go("savingDetail", id)} items={savingsRaw.items || []} onCreate={(b) => savingsRaw.create(b)} onUpdate={updateSavingGoal} onDelete={deleteSavingGoal} />;
       break;
     case "savingDetail":
-      screen = <SavingGoalDetail goalId={selGoal} go={go} items={savingsRaw.items || []} token={token} />;
+      screen = <SavingGoalDetail goalId={selGoal} go={go} items={savingsRaw.items || []} token={token} reloadSavings={savingsRaw.reload} />;
       break;
     default:
       screen = <Dashboard go={go} categoryStats={categoryStats} monthFlow={monthFlow} notifications={[]} categories={categories} paymentMethods={paymentMethods} onExpense={() => setExpenseModal(true)} onIncome={() => setIncomeModal(true)} />;

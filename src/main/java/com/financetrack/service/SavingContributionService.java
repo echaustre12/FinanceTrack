@@ -57,6 +57,8 @@ public class SavingContributionService {
                 .orElseThrow(() ->
                         new RuntimeException("Meta de ahorro no encontrada")
                 );
+        if (goal.getCurrentAmount().compareTo(goal.getTargetAmount()) >= 0) {
+                throw new RuntimeException("La meta ya está completada, no se pueden añadir más fondos");}
         SavingContribution contribution = new SavingContribution();
         contribution.setAmount(request.getAmount());
         contribution.setDescription(request.getDescription());
